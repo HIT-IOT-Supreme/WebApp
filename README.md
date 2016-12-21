@@ -15,3 +15,7 @@
     . venv/bin/activate
     
 > 以上指令在ubuntu下测试可用，在Windows下需要在`scripts`目录下寻找`activate`
+
+在虚拟环境下安装依赖：
+
+    pip install -r requirements.txt
