@@ -1,6 +1,6 @@
 # web_app
 
-## 开发须知
+## 开发准备
 
 建议在`virtualenv`虚拟环境下进行开发，使用如下代码进行虚拟环境的安装：
 
@@ -19,3 +19,13 @@
 在虚拟环境下安装依赖：
 
     pip install -r requirements.txt
+    
+启动工程：
+
+    python run.py 
+    
+## 相关API
+
+### 心知天气
+
+`test/weather.py`为测试脚本。此处点击[API doc](http://www.thinkpage.cn/doc)。
