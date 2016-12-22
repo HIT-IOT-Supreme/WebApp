@@ -7,7 +7,16 @@ URL = 'http://www.tuling123.com/openapi/api'
 
 data = {
     'key': KEY,
-    'info': '告诉我最近有什么新闻'
+    'info': u'告诉我最近有什么新闻'
+}
+
+result = post(URL, data=data)
+
+print result.content
+
+data = {
+    'key': KEY,
+    'info': u'从哈尔滨到汝州的火车票'
 }
 
 result = post(URL, data=data)
