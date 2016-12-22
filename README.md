@@ -36,4 +36,4 @@
 
 ### 图灵机器人
 
-'test/turing_robot'为测试脚本。此处点击[API doc](http://www.tuling123.com/help/h_cent_webapi.jhtml)。
+`test/turing_robot`为测试脚本。此处点击[API doc](http://www.tuling123.com/help/h_cent_webapi.jhtml)。
