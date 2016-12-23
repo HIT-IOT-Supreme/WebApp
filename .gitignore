@@ -89,3 +89,6 @@ ENV/
 
 # Pycharm Config
 .idea
+
+# Log files
+log/*
