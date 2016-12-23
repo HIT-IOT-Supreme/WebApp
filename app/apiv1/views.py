@@ -8,7 +8,7 @@ class HelloWorld(Resource):
 
     def get(self):
         result = {
-            'info': 'Hello sb dusz!'
+            'info': u'Hello 智障杜老大'
         }
         return jsonify(result)
 
