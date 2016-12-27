@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
-from requests import post
+import json
+from requests import post, get
 
 APP_KEY = 'a49b555506bfc2cee73b95cf'
 MASTER_SECRET = 'c9fe577440420acc429b74dc'
@@ -11,19 +12,20 @@ headers = {
     'Authorization': 'Basic ' + base64.b64encode(APP_KEY+':'+MASTER_SECRET)
 }
 
-data = {
+data = json.loads(get('http://localhost:5000/api/zhihu').content)
+
+
+jpush_data = {
     'platform': ['android'],
     'audience': 'all',
     'message': {
-        'msg_content':{
-            '测试': '智障杜圣哲'
-        },
+        'msg_content': data,
         'content_type': 'test'
     }
 }
 
-result = post(HOST, headers=headers, json=data)
-print result.request.headers
+print jpush_data
+result = post(HOST, headers=headers, json=jpush_data)
 print result.content
 
 

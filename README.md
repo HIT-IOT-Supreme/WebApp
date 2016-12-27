@@ -50,3 +50,7 @@ supervisorctl -c supervisor.conf stop [all]|[appname]      关闭指定/所有 s
 ### 图灵机器人
 
 `test/turing_robot`为测试脚本。此处点击[API doc](http://www.tuling123.com/help/h_cent_webapi.jhtml)。
+
+### 极光推送
+
+`test/jpush`为测试脚本。此处点击[API doc](http://docs.jiguang.cn/jpush/server/push/rest_api_v3_push)。

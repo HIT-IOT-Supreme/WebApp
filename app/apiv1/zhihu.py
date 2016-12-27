@@ -17,7 +17,9 @@ class ZhiHu(Resource):
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
         }
 
-        result = requests.get(URL, headers=headers)
-        return jsonify(json.loads(result.content))
+        result = json.loads(requests.get(URL, headers=headers).content)
+
+        info = u'今日最新知乎日报: ' + '---'.join(map(lambda a:a['title'], result['stories']))
+        return jsonify(info=info)
 
 api.add_resource(ZhiHu, '/zhihu/')
