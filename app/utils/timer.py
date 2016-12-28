@@ -2,6 +2,7 @@
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.base import ConflictingIdError
+from .pusher import push_weather, push_zhihu
 
 # import app.apiv1.auth as auth 待解决的循环导入冲突问题
 
@@ -10,6 +11,8 @@ class Timer():
 
     def __init__(self):
         self.scheduler = BackgroundScheduler()
+        self.actions = []
+        self.is_reading = False
         # self.clock_set = map(lambda a:a['time'], auth.get_clocks())
 
     def start(self):
@@ -25,8 +28,22 @@ class Timer():
         except ConflictingIdError:
             pass
 
+    def read_on(self):
+
+        if not self.action:
+            self.is_reading = False
+            return
+
+        self.is_reading = True
+        func = self.actions.pop(0)
+        func()
+
     def action(self, id):
         print('Tick! The time is: %s' % datetime.now())
+        self.actions.extend([push_weather, push_zhihu])
+        if not self.is_reading:
+            self.read_on()
+
         self.scheduler.remove_job(job_id=id)
 
 
