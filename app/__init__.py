@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from utils.timer import Timer
 from config import *
 
 db = SQLAlchemy()
+timer = Timer()
 
 
 def create_app():
@@ -21,5 +23,7 @@ def create_app():
 
     from .apiv1 import apiv1_bp
     app.register_blueprint(apiv1_bp, url_prefix='/api')
+
+    timer.start()
 
     return app

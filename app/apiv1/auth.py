@@ -2,7 +2,7 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
 from . import api
-from .. import db
+from .. import db, timer
 from ..models import User, Clock
 
 auth_parser = reqparse.RequestParser()
@@ -67,5 +67,8 @@ def get_clocks():
 def add_clock():
     args = clock_parser.parse_args()
     clock = Clock(time=args['time'], user_id=1)
+
+    timer.add_timer(args['time'])
+
     db.session.add(clock)
     db.session.commit()
