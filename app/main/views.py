@@ -4,4 +4,4 @@ from . import main_bp
 
 @main_bp.route('/')
 def index():
-    return 'Hello World!'
+    return 'Oh 智障 杜老大!～'

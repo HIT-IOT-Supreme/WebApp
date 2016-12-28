@@ -16,16 +16,12 @@ class AuthAPI(Resource):
 
     def get(self):
 
-        users = User.query.all()
-        return jsonify(map(eval, map(str, users)))
+        return jsonify(get_users())
 
     def post(self):
-        args = auth_parser.parse_args()
-        user = User(**args)
-        db.session.add(user)
 
         try:
-            db.session.commit()
+            add_user()
         except Exception:
             return jsonify({'code': '404'})
 
@@ -37,19 +33,39 @@ api.add_resource(AuthAPI, '/auth/')
 class ClockAPI(Resource):
 
     def get(self):
-        user = User.query.filter_by(id=1).first()
-        return jsonify(map(eval, map(str, user.clocks)))
+        return jsonify(get_clocks())
 
     def post(self):
-        args = clock_parser.parse_args()
-        clock = Clock(time=args['time'], user_id=1)
-        db.session.add(clock)
 
         try:
-            db.session.commit()
+            add_clock()
         except Exception:
             return jsonify({'code': '404'})
 
         return jsonify({'code': '200'})
 
 api.add_resource(ClockAPI, '/clock/')
+
+
+def get_users():
+    users = User.query.all()
+    return map(eval, map(str, users))
+
+
+def add_user():
+    args = auth_parser.parse_args()
+    user = User(**args)
+    db.session.add(user)
+    db.session.commit()
+
+
+def get_clocks():
+    user = User.query.filter_by(id=1).first()
+    return map(eval, map(str, user.clocks))
+
+
+def add_clock():
+    args = clock_parser.parse_args()
+    clock = Clock(time=args['time'], user_id=1)
+    db.session.add(clock)
+    db.session.commit()

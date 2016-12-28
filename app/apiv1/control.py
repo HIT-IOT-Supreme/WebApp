@@ -6,9 +6,11 @@ from . import api
 
 class Control(Resource):
 
-    def post(self):
+    def get(self, action):
 
+        if action == '':
+            pass
 
-        return jsonify({'code': '200'})
+        return jsonify({'action': action})
 
-api.add_resource(Control, '/control/')
+api.add_resource(Control, '/control/<action>/')

@@ -1,43 +1,31 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
-import flask_restful as restful
-#from flask import json
 import json
 import requests
 from flask import jsonify
 from flask_restful import Resource
+from . import api
 
 KEY = '5ftvygbtl1i2qilk'
 
 HOST = 'https://api.thinkpage.cn/v3'
-
-app = Flask(__name__)
-api = restful.Api(app)
+WEATHER_NOW = HOST + '/weather/now.json'
 
 
-WHEATHER_NOW = HOST + '/weather/now.json'  #get
-WHEATHER_ALARM = HOST + '/weather/alarm.json'
-AIR_NOW = HOST + '/air/now.json'
-LIFE_SUGGESTION = HOST + '/life/suggestion.json'  #get
-LIFE_CHINESE_CALENDAR = HOST + '/life/chinese_calendar.json'
-GEO_SUN = HOST + '/geo/sun.json'
+class WeatherAPI(Resource):
+    def get(self):
 
-#keywords:now,suggestion,air,alarm,sun,calendar
-request = {"now": WHEATHER_NOW, "suggestion": LIFE_SUGGESTION,
-           "air": AIR_NOW, "alarm": WHEATHER_ALARM,
-           "sun": GEO_SUN, "calendar": LIFE_CHINESE_CALENDAR}
+        return jsonify(info=parse_weather())
 
-class getWeather(Resource):
-    def get(self,info):
-        address = {
-            'key': KEY,
-            'location': 'haerbin'
-        }
-        req = request[info]
-        result_now_weather = requests.get(req, params=address)
-        return jsonify(json.loads(result_now_weather.content,encoding='utf-8'))
+api.add_resource(WeatherAPI, '/weather/')
 
-api.add_resource(getWeather, '/weathers/<string:info>')
 
-if __name__ == '__main__':
-    app.run(port= 8880,debug=True)
+def parse_weather():
+    address = {
+        'key': KEY,
+        'location': 'haerbin'
+    }
+    result = json.loads(requests.get(WEATHER_NOW, params=address).content)['results'][0]
+    return u'主人～您所在的城市为' + result['location']['name'] + ',' \
+            + u'当前的温度为' + result['now']['temperature'] + ',' \
+            + u'天气为' + result['now']['text'] + '.' \
+            + u'要注意身体噢'
