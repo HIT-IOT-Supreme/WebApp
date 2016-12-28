@@ -17,7 +17,7 @@ class User(db.Model):
 
 class Clock(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.DateTime)
+    time = db.Column(db.Time)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',
