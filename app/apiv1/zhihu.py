@@ -8,7 +8,7 @@ from . import api
 URL = 'http://news-at.zhihu.com/api/4/news/latest'
 
 
-class ZhiHu(Resource):
+class ZhiHuAPI(Resource):
 
     def get(self):
 
@@ -22,4 +22,4 @@ class ZhiHu(Resource):
         info = u'今日最新知乎日报: ' + '---'.join(map(lambda a:a['title'], result['stories']))
         return jsonify(info=info)
 
-api.add_resource(ZhiHu, '/zhihu/')
+api.add_resource(ZhiHuAPI, '/zhihu/')

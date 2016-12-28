@@ -12,6 +12,10 @@ def create_app():
 
     db.init_app(app)
 
+    # create tables
+    from models import User, Clock
+    db.create_all(app=app)
+
     from .main import main_bp
     app.register_blueprint(main_bp)
 

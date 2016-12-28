@@ -9,7 +9,7 @@ KEY = '393d7387723348a79ea7cd846535eb3b'
 URL = 'http://www.tuling123.com/openapi/api'
 
 
-class Robot(Resource):
+class RobotAPI(Resource):
 
     def get(self, info):
 
@@ -21,4 +21,4 @@ class Robot(Resource):
         result = requests.post(URL, data=data)
         return jsonify(json.loads(result.content))
 
-api.add_resource(Robot, '/robot/<info>/')
+api.add_resource(RobotAPI, '/robot/<info>/')
