@@ -18,7 +18,7 @@ class RobotAPI(Resource):
             'info': info
         }
 
-        result = requests.post(URL, data=data)
-        return jsonify(json.loads(result.content))
+        result = json.loads(requests.post(URL, data=data).content)
+        return jsonify(info=result['text'])
 
 api.add_resource(RobotAPI, '/robot/<info>/')
