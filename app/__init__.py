@@ -15,7 +15,7 @@ def create_app():
     db.init_app(app)
 
     # create tables
-    from models import User, Clock
+    from models import User, Clock, Sleep
     db.create_all(app=app)
 
     from .main import main_bp
