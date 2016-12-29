@@ -45,9 +45,8 @@ class Timer():
         play_music()
         break_up()
 
-        self.actions.extend([push_weather, push_zhihu])
-        if not self.is_reading:
-            self.read_on()
+        self.actions = [push_weather, push_zhihu]
+        self.read_on()
 
         self.scheduler.remove_job(job_id=id)
 
