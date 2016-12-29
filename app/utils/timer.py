@@ -3,6 +3,7 @@ from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.base import ConflictingIdError
 from .pusher import push_weather, push_zhihu
+from .controller import play_music, break_up
 
 # import app.apiv1.auth as auth 待解决的循环导入冲突问题
 
@@ -40,6 +41,10 @@ class Timer():
 
     def action(self, id):
         print('Tick! The time is: %s' % datetime.now())
+
+        play_music()
+        break_up()
+
         self.actions.extend([push_weather, push_zhihu])
         if not self.is_reading:
             self.read_on()
