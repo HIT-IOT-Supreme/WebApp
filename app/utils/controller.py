@@ -3,7 +3,7 @@ import os
 
 
 def break_up():
-    os.system('sudo python scripts/warn.py')
+    os.system('sudo python scripts/sunRaise.py')
 
 
 def play_music():
