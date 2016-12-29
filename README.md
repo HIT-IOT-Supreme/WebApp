@@ -54,3 +54,16 @@ supervisorctl -c supervisor.conf stop [all]|[appname]      关闭指定/所有 s
 ### 极光推送
 
 `test/jpush`为测试脚本。此处点击[API doc](http://docs.jiguang.cn/jpush/server/push/rest_api_v3_push)。
+
+## 文件结构
+
+- `app`为项目主文件夹
+    - `apiv1`为Android端提供API。
+    - `utils`提供推送、控制、计时器工具类。
+    - `__init__.py`初始化`app`。
+    - `models.py`建立了数据库中应有的表。
+- `scripts`为外部脚本。
+- `test`测试外部API。
+- `config.py`提供各个配置对象。
+- `run.py`为主模板。
+
