@@ -8,8 +8,7 @@ def break_up():
 
 
 def play_music():
-    pass
-    # thread.start_new_thread(shell_play_music, ())
+    thread.start_new_thread(shell_play_music, ())
 
 
 def shell_break_up():
